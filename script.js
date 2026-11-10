@@ -1,7 +1,7 @@
 /* ============ CONFIGURAÇÃO CENTRAL (edite aqui) ============ */
 const CONFIG = {
-  whatsapp: "5531982571841",        // PLACEHOLDER: DDI + DDD + número, só dígitos (ex.: 5511999999999)
-  email: "newherawebsites@gmail.com",                         // PLACEHOLDER: e-mail comercial (vazio = não aparece no rodapé)
+  whatsapp: "5500000000000",        // PLACEHOLDER: DDI + DDD + número, só dígitos (ex.: 5511999999999)
+  email: "",                         // PLACEHOLDER: e-mail comercial (vazio = não aparece no rodapé)
   social: { Instagram: "", LinkedIn: "", Facebook: "" } // PLACEHOLDER: URLs completas (vazio = não aparece)
 };
 const WA = (t, m) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m || "Olá, New Hera! Gostaria de solicitar um orçamento: " + t + ".")}`;
@@ -12,8 +12,8 @@ const SV = [["vitrine", "Sites vitrine", "Apresentação profissional da empresa
 const DF = [["Atendimento direto", "Você conversa diretamente com quem desenvolve o seu projeto."], ["Design personalizado", "Cada interface parte da identidade da sua empresa."], ["Sites responsivos", "Layouts que se adaptam a celulares, tablets e computadores."], ["Navegação intuitiva", "Estrutura clara para o visitante encontrar o que procura."], ["Desenvolvimento organizado", "Etapas definidas e código limpo, do briefing à publicação."], ["Comunicação transparente", "Você acompanha as decisões e sabe o que esperar do projeto."]];
 const PR = [["Briefing", "Entendemos as necessidades e os objetivos da empresa."], ["Planejamento", "Definimos a estrutura, o conteúdo e a identidade visual do projeto."], ["Desenvolvimento", "Construímos, testamos e ajustamos o website."], ["Publicação", "Entregamos o projeto preparado para publicação na internet."]];
 const PL = [ // [nome, prefixo, preço, sufixo, itens]
-  ["Site vitrine essencial", "", "R$ 400,00", "", ["Uma página", "Até cinco seções", "Design responsivo", "Botão de WhatsApp", "Links para redes sociais", "SEO básico", "Uma rodada de ajustes"]],
-  ["Landing page profissional", "", "R$ 500,00", "", ["Página estratégica de conversão", "Até sete seções", "Design personalizado", "Botões de ação", "Formulário de contato, quando aplicável", "SEO básico", "Duas rodadas de ajustes"]],
+  ["Site vitrine essencial", "", "R$ 300,00", "", ["Uma página", "Até cinco seções", "Design responsivo", "Botão de WhatsApp", "Links para redes sociais", "SEO básico", "Uma rodada de ajustes"]],
+  ["Landing page profissional", "", "R$ 400,00", "", ["Página estratégica de conversão", "Até sete seções", "Design personalizado", "Botões de ação", "Formulário de contato, quando aplicável", "SEO básico", "Duas rodadas de ajustes"]],
   ["Site institucional", "", "R$ 650,00", "", ["Até cinco páginas", "Página inicial", "Sobre a empresa", "Serviços", "Portfólio", "Contato", "Design responsivo", "SEO básico", "Duas rodadas de ajustes"]],
   ["Catálogo digital", "", "R$ 850,00", "", ["Catálogo online", "Até 30 produtos cadastrados", "Organização por categorias", "Imagens e descrições", "Botões de consulta pelo WhatsApp", "Design responsivo"]],
   ["Loja virtual", "A partir de", "R$ 1.500,00", "", ["Configuração inicial de loja virtual", "Organização de produtos", "Estrutura de categorias", "Configuração da plataforma escolhida", "Orientação para recebimento de pedidos e pagamentos", "Design e personalização conforme a plataforma"]],
@@ -33,20 +33,6 @@ $("#fq").innerHTML = FQ.map(([q, a]) => `<div class="fq"><button aria-expanded="
 $("#fsv").innerHTML = SV.map(([, t]) => `<li><a href="#servicos">${t}</a></li>`).join("");
 $("#fct").innerHTML = `<li><a data-wa="Contato geral" href="#contato" target="_blank" rel="noopener">WhatsApp</a></li>` + (CONFIG.email ? `<li><a href="mailto:${CONFIG.email}">${CONFIG.email}</a></li>` : "") + Object.entries(CONFIG.social).filter(([, u]) => u).map(([n, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${n}</a></li>`).join("");
 $("#yr").textContent = "© " + new Date().getFullYear() + " New Hera. Tecnologia, criatividade e presença digital.";
-/* AVALIAÇÕES: substitua pelos depoimentos reais (com autorização do cliente) e remova "sample: true" */
-const REV = [
-  { n: "Cliente 1", c: "Segmento da empresa", s: 5, t: "Espaço reservado para o texto da avaliação.", sample: true },
-  { n: "Cliente 2", c: "Segmento da empresa", s: 5, t: "Espaço reservado para o texto da avaliação.", sample: true },
-  { n: "Cliente 3", c: "Segmento da empresa", s: 5, t: "Espaço reservado para o texto da avaliação.", sample: true },
-  { n: "Cliente 4", c: "Segmento da empresa", s: 4, t: "Espaço reservado para o texto da avaliação.", sample: true },
-  { n: "Cliente 5", c: "Segmento da empresa", s: 4, t: "Espaço reservado para o texto da avaliação.", sample: true },
-  { n: "Cliente 6", c: "Segmento da empresa", s: 3, t: "Espaço reservado para o texto da avaliação.", sample: true }
-];
-const stars = s => `<span class="stars" role="img" aria-label="${s} de 5 estrelas">${"★".repeat(s)}<i>${"★".repeat(5 - s)}</i></span>`;
-$("#rv").innerHTML = REV.map(r => `<article class="card rc tilt" data-r>${r.sample ? '<span class="tag exm">Exemplo</span>' : ""}${stars(r.s)}<blockquote>“${r.t}”</blockquote><div class="who"><span class="av">${r.n[0]}</span><div>${r.n}<small>${r.c}</small></div></div></article>`).join("");
-const real = REV.filter(r => !r.sample), avg = real.length ? real.reduce((a, r) => a + r.s, 0) / real.length : 0;
-$("#rvs").innerHTML = real.length ? `<div><div class="big">${avg.toFixed(1).replace(".", ",")}</div>${stars(Math.round(avg))}<small>${real.length} avaliações</small></div><div class="dist">${[5, 4, 3, 2, 1].map(k => { const n = real.filter(r => r.s === k).length; return `<div>${k}★<i style="--w:${n / real.length * 100}%"></i>${n}</div>`; }).join("")}</div>` : "";
-$("#rvn").innerHTML = REV.some(r => r.sample) ? "Os cartões marcados como “Exemplo” são espaços reservados, não avaliações reais. Edite a lista REV no início deste bloco do script.js e remova sample: true ao publicar depoimentos reais." : "";
 $$("[data-wa]").forEach(a => { a.href = WA(a.dataset.wa, a.dataset.msg); a.target = "_blank"; a.rel = "noopener"; });
 
 /* ============ ANIMAÇÕES ============ */
@@ -57,7 +43,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return; const t = e.target; t.classList.add("in"); io.unobserve(t);
   setTimeout(() => { t.style.transitionDelay = ""; t.removeAttribute("data-r"); t.classList.add("done", "d"); }, 1800);
 }), { threshold: .15 });
-$$("[data-r],.kt,.steps").forEach(e => io.observe(e));
+const startIO = () => $$("[data-r],.kt,.steps").forEach(e => io.observe(e));
 
 $$(".fq").forEach(f => $("button", f).onclick = () => { const o = f.classList.toggle("open"); $("button", f).setAttribute("aria-expanded", o); });
 const hd = $("#hd"), mb = $("#mb");
@@ -84,12 +70,12 @@ if (!RM && FINE) {
     c.onpointerleave = () => { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); };
   });
   const hv = $(".hv svg");
-  if (hv) $(".hero").addEventListener("pointermove", e => { hv.style.setProperty("--ry", (e.clientX / innerWidth - .5) * 14 + "deg"); hv.style.setProperty("--rx", (.5 - e.clientY / innerHeight) * 10 + "deg"); });
+  if (hv) $(".hero").addEventListener("pointermove", e => { hv.style.setProperty("--ry", (e.clientX / innerWidth - .5) * 14 + "deg"); hv.style.setProperty("--px", e.clientX / innerWidth - .5); hv.style.setProperty("--py", e.clientY / innerHeight - .5); hv.style.setProperty("--rx", (.5 - e.clientY / innerHeight) * 10 + "deg"); });
 }
 
 /* ============ PÁGINAS E TRANSIÇÕES ============ */
-const ORDER = ["inicio", "sobre", "servicos", "projetos", "diferenciais", "processo", "precos", "avaliacoes", "faq", "contato"];
-const TT = { inicio: "Início", sobre: "Sobre", servicos: "Serviços", projetos: "Projetos", diferenciais: "Diferenciais", processo: "Processo", precos: "Preços", avaliacoes: "Avaliações", faq: "Dúvidas frequentes", contato: "Contato" };
+const ORDER = ["inicio", "sobre", "servicos", "projetos", "diferenciais", "processo", "precos", "faq", "contato"];
+const TT = { inicio: "Início", sobre: "Sobre", servicos: "Serviços", projetos: "Projetos", diferenciais: "Diferenciais", processo: "Processo", precos: "Preços", faq: "Dúvidas frequentes", contato: "Contato" };
 const pages = Object.fromEntries(ORDER.map(k => [k, $("#pg-" + k)]));
 $("#fnav").innerHTML = ORDER.map(k => `<li><a href="#${k}">${TT[k]}</a></li>`).join("");
 ORDER.forEach((k, i) => { if (i && i < ORDER.length - 1) { const w = document.createElement("div"); w.className = "nxw"; w.innerHTML = `<a class="btn" href="#${ORDER[i + 1]}">Próxima página: ${TT[ORDER[i + 1]]} →</a>`; $(".wrap", pages[k]).append(w); } });
@@ -101,14 +87,14 @@ const show = k => {
   $$("#nav a").forEach(a => a.getAttribute("href") === "#" + k ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   document.title = (k === "inicio" ? "New Hera | Estúdio digital e desenvolvimento web" : TT[k] + " | New Hera");
 };
-const enter = p => RM || p.animate([{ opacity: 0, transform: "translateY(30px) scale(.985)", filter: "blur(12px)" }, { opacity: 1, transform: "none", filter: "blur(0)" }], { duration: 950, easing: "cubic-bezier(.2,.8,.2,1)" });
+const enter = p => RM || p.animate([{ opacity: 0, transform: "translateY(30px) scale(.985)" }, { opacity: 1, transform: "none" }], { duration: 950, easing: "cubic-bezier(.2,.8,.2,1)" });
 const sweep = (clip) => [ov.animate(clip, { duration: D, easing: EZ, fill: "forwards" }), ol.animate([{ transform: "translateX(0)" }, { transform: "translateX(calc(100vw - 2px))" }], { duration: D, easing: EZ, fill: "forwards" })];
 async function go() {
   const k = want(); if (k === cur || busy) return; busy = true;
   if (cur === null || RM) { show(k); enter(pages[k]); }
   else {
     ov.style.visibility = ol.style.visibility = "visible";
-    const out = pages[cur].animate([{ opacity: 1, transform: "none", filter: "blur(0)" }, { opacity: .25, transform: "scale(.96) translateX(-4%)", filter: "blur(10px)" }], { duration: D, easing: EZ, fill: "forwards" });
+    const out = pages[cur].animate([{ opacity: 1, transform: "none" }, { opacity: .25, transform: "scale(.96) translateX(-4%)" }], { duration: D, easing: EZ, fill: "forwards" });
     const a = sweep([{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0 0 0)" }]);
     await a[0].finished; show(k); out.cancel();
     await new Promise(r => setTimeout(r, 90));
@@ -117,4 +103,32 @@ async function go() {
   }
   busy = false; if (want() !== cur) go();
 }
-addEventListener("hashchange", go); go();
+addEventListener("hashchange", go);
+
+/* ============ INTERAÇÕES, PARTÍCULAS E INTRO ============ */
+addEventListener("pointerdown", e => { if (RM) return; const r = document.createElement("i"); r.className = "rp"; r.style.left = e.clientX + "px"; r.style.top = e.clientY + "px"; document.body.append(r); setTimeout(() => r.remove(), 800); });
+if (!RM && FINE) {
+  const cr = $(".cr"), cd = $(".cd"); let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+  document.body.classList.add("hc");
+  addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; cd.style.transform = `translate(${mx}px,${my}px)`; cr.classList.toggle("on", !!(e.target.closest && e.target.closest("a,button,.card,.pj"))); }, { passive: true });
+  (function f() { rx += (mx - rx) * .16; ry += (my - ry) * .16; cr.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(f); })();
+  $$(".btn").forEach(b => { b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); b.style.setProperty("--tx", (e.clientX - r.left - r.width / 2) * .25 + "px"); b.style.setProperty("--ty", (e.clientY - r.top - r.height / 2) * .35 + "px"); }); b.addEventListener("pointerleave", () => { b.style.setProperty("--tx", "0px"); b.style.setProperty("--ty", "0px"); }); });
+}
+const cv = $(".cv");
+if (!RM && cv && cv.getContext) {
+  const x = cv.getContext("2d"), m = { x: -999, y: -999 }; let W, H, P = [];
+  const rs = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; P = Array.from({ length: Math.min(70, W / 18 | 0) }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 })); };
+  rs(); addEventListener("resize", rs); addEventListener("pointermove", e => { m.x = e.clientX; m.y = e.clientY; }, { passive: true });
+  const ln = (a, b, d, R, al) => { x.strokeStyle = `rgba(${R},${(1 - d / (R === "50,183,223" ? 120 : 170)) * al})`; x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke(); };
+  (function f() {
+    x.clearRect(0, 0, W, H);
+    for (const p of P) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1; const dx = m.x - p.x, dy = m.y - p.y; if (Math.hypot(dx, dy) < 170) { p.x += dx * .012; p.y += dy * .012; } x.fillStyle = "rgba(85,215,255,.6)"; x.beginPath(); x.arc(p.x, p.y, 1.5, 0, 7); x.fill(); }
+    for (let i = 0; i < P.length; i++) { for (let k = i + 1; k < P.length; k++) { const d = Math.hypot(P[i].x - P[k].x, P[i].y - P[k].y); if (d < 120) ln(P[i], P[k], d, "50,183,223", .25); } const d = Math.hypot(m.x - P[i].x, m.y - P[i].y); if (d < 170) ln(P[i], m, d, "85,215,255", .5); }
+    requestAnimationFrame(f);
+  })();
+}
+const intro = $(".intro"), boot = () => { go(); startIO(); };
+if (RM) { intro.remove(); boot(); } else {
+  $(".iw").innerHTML = "New Hera".replace(/./g, (ch, i) => `<span style="--i:${i}"${i === 4 ? ' class="h"' : ""}>${ch === " " ? "&nbsp;" : ch}</span>`);
+  setTimeout(() => { boot(); intro.animate([{ clipPath: "inset(0 0 0 0)" }, { clipPath: "inset(0 0 100% 0)" }], { duration: 800, easing: EZ, fill: "forwards" }).finished.then(() => intro.remove()); }, 1600);
+}
